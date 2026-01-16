@@ -1,0 +1,39 @@
+$date
+	Sat Jan 10 12:35:36 2026
+$end
+$version
+	Icarus Verilog
+$end
+$timescale
+	1s
+$end
+$scope module tb_inverter $end
+$var wire 1 ! tb_out $end
+$var reg 1 " tb_in $end
+$scope module DUT $end
+$var wire 1 ! enable $end
+$var wire 1 " reset $end
+$upscope $end
+$upscope $end
+$enddefinitions $end
+$comment Show the parameter values. $end
+$dumpall
+$end
+#0
+$dumpvars
+0"
+1!
+$end
+#2
+0!
+1"
+#4
+1!
+0"
+#6
+0!
+1"
+#8
+1!
+0"
+#18

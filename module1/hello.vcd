@@ -1,0 +1,21 @@
+$date
+	Sat Jan 10 12:12:35 2026
+$end
+$version
+	Icarus Verilog
+$end
+$timescale
+	1s
+$end
+$scope module top $end
+$var reg 128 ! str [128:1] $end
+$upscope $end
+$enddefinitions $end
+$comment Show the parameter values. $end
+$dumpall
+$end
+#0
+$dumpvars
+b10010000110010101101100011011000110111100100000011101110110111101101100011100100110010000100001 !
+$end
+#1

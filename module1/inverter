@@ -1,0 +1,50 @@
+#! /home/rajanssi/projects/fpga/oss-cad-suite/bin/vvp
+:ivl_version "13.0 (devel)" "(s20221226-533-g676b36e45)";
+:ivl_delay_selection "TYPICAL";
+:vpi_time_precision + 0;
+:vpi_module "/home/rajanssi/projects/fpga/oss-cad-suite/lib/ivl/system.vpi";
+:vpi_module "/home/rajanssi/projects/fpga/oss-cad-suite/lib/ivl/vhdl_sys.vpi";
+:vpi_module "/home/rajanssi/projects/fpga/oss-cad-suite/lib/ivl/vhdl_textio.vpi";
+:vpi_module "/home/rajanssi/projects/fpga/oss-cad-suite/lib/ivl/v2005_math.vpi";
+:vpi_module "/home/rajanssi/projects/fpga/oss-cad-suite/lib/ivl/va_math.vpi";
+S_0x55555558f7e0 .scope module, "tb_inverter" "tb_inverter" 2 12;
+ .timescale 0 0;
+v0x5555555b3a50_0 .var "tb_in", 0 0;
+v0x5555555b3af0_0 .net "tb_out", 0 0, L_0x5555555b3b90;  1 drivers
+S_0x555555568e30 .scope module, "DUT" "inverter" 2 31, 3 1 0, S_0x55555558f7e0;
+ .timescale 0 0;
+    .port_info 0 /INPUT 1 "reset";
+    .port_info 1 /OUTPUT 1 "enable";
+L_0x5555555b3b90 .functor NOT 1, v0x5555555b3a50_0, C4<0>, C4<0>, C4<0>;
+v0x555555569010_0 .net "enable", 0 0, L_0x5555555b3b90;  alias, 1 drivers
+v0x5555555b3930_0 .net "reset", 0 0, v0x5555555b3a50_0;  1 drivers
+    .scope S_0x55555558f7e0;
+T_0 ;
+    %pushi/vec4 0, 0, 1;
+    %store/vec4 v0x5555555b3a50_0, 0, 1;
+    %vpi_call 2 19 "$monitor", "%g\011 reset:%b enable:%b", $time, v0x5555555b3a50_0, v0x5555555b3af0_0 {0 0 0};
+    %vpi_call 2 20 "$dumpfile", "tb_inverter.vcd" {0 0 0};
+    %vpi_call 2 21 "$dumpvars", 32'sb00000000000000000000000000000000, S_0x55555558f7e0 {0 0 0};
+    %vpi_call 2 22 "$display", "time\011 in out" {0 0 0};
+    %delay 2, 0;
+    %pushi/vec4 1, 0, 1;
+    %store/vec4 v0x5555555b3a50_0, 0, 1;
+    %delay 2, 0;
+    %pushi/vec4 0, 0, 1;
+    %store/vec4 v0x5555555b3a50_0, 0, 1;
+    %delay 2, 0;
+    %pushi/vec4 1, 0, 1;
+    %store/vec4 v0x5555555b3a50_0, 0, 1;
+    %delay 2, 0;
+    %pushi/vec4 0, 0, 1;
+    %store/vec4 v0x5555555b3a50_0, 0, 1;
+    %delay 10, 0;
+    %vpi_call 2 28 "$finish" {0 0 0};
+    %end;
+    .thread T_0;
+# The file index is used to find the file name in the following table.
+:file_names 4;
+    "N/A";
+    "<interactive>";
+    "tb_inverter.v";
+    "inverter.v";
