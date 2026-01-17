@@ -1,0 +1,114 @@
+#! /home/anssi/projects/fpga/oss-cad-suite/bin/vvp
+:ivl_version "13.0 (devel)" "(s20221226-533-g676b36e45)";
+:ivl_delay_selection "TYPICAL";
+:vpi_time_precision - 12;
+:vpi_module "/home/anssi/projects/fpga/oss-cad-suite/lib/ivl/system.vpi";
+:vpi_module "/home/anssi/projects/fpga/oss-cad-suite/lib/ivl/vhdl_sys.vpi";
+:vpi_module "/home/anssi/projects/fpga/oss-cad-suite/lib/ivl/vhdl_textio.vpi";
+:vpi_module "/home/anssi/projects/fpga/oss-cad-suite/lib/ivl/v2005_math.vpi";
+:vpi_module "/home/anssi/projects/fpga/oss-cad-suite/lib/ivl/va_math.vpi";
+S_0x55555a25f9b0 .scope module, "tb_mixed_logic_unit" "tb_mixed_logic_unit" 2 4;
+ .timescale -9 -9;
+v0x55555a2b2540_0 .var "i_clock", 0 0;
+v0x55555a2b2600_0 .var "i_e", 0 0;
+v0x55555a2b26a0_0 .net "i_nets", 3 0, L_0x55555a2b2c30;  1 drivers
+v0x55555a2b2740_0 .var "i_q", 0 0;
+v0x55555a2b27e0_0 .var "i_r", 0 0;
+v0x55555a2b2880_0 .var "i_w", 0 0;
+v0x55555a2b2920_0 .net "o_a", 0 0, v0x55555a2b2080_0;  1 drivers
+v0x55555a2b29f0_0 .net "o_b", 0 0, v0x55555a2b2140_0;  1 drivers
+v0x55555a2b2ac0_0 .net "o_c", 0 0, L_0x55555a2b31d0;  1 drivers
+v0x55555a2b2b90_0 .net "o_nets", 2 0, L_0x55555a2b2e20;  1 drivers
+L_0x55555a2b2c30 .concat [ 1 1 1 1], v0x55555a2b2740_0, v0x55555a2b2880_0, v0x55555a2b2600_0, v0x55555a2b27e0_0;
+L_0x55555a2b2e20 .concat [ 1 1 1 0], v0x55555a2b2080_0, v0x55555a2b2140_0, L_0x55555a2b31d0;
+S_0x55555a25fb40 .scope module, "DUT" "mixed_logic_unit" 2 21, 3 3 0, S_0x55555a25f9b0;
+ .timescale -10 -12;
+    .port_info 0 /INPUT 1 "i_clock";
+    .port_info 1 /INPUT 1 "i_q";
+    .port_info 2 /INPUT 1 "i_w";
+    .port_info 3 /INPUT 1 "i_e";
+    .port_info 4 /INPUT 1 "i_r";
+    .port_info 5 /OUTPUT 1 "o_a";
+    .port_info 6 /OUTPUT 1 "o_b";
+    .port_info 7 /OUTPUT 1 "o_c";
+L_0x55555a2b2fb0/d .functor OR 1, v0x55555a2b2740_0, v0x55555a2b2880_0, C4<0>, C4<0>;
+L_0x55555a2b2fb0 .delay 1 (330,330,330) L_0x55555a2b2fb0/d;
+L_0x55555a2b30c0/d .functor AND 1, v0x55555a2b2600_0, v0x55555a2b27e0_0, C4<1>, C4<1>;
+L_0x55555a2b30c0 .delay 1 (350,350,350) L_0x55555a2b30c0/d;
+L_0x55555a2b31d0/d .functor XOR 1, L_0x55555a2b2fb0, L_0x55555a2b30c0, C4<0>, C4<0>;
+L_0x55555a2b31d0 .delay 1 (120,120,120) L_0x55555a2b31d0/d;
+v0x55555a25fd20_0 .net "i_clock", 0 0, v0x55555a2b2540_0;  1 drivers
+v0x55555a2b1d50_0 .net "i_e", 0 0, v0x55555a2b2600_0;  1 drivers
+v0x55555a2b1e10_0 .net "i_q", 0 0, v0x55555a2b2740_0;  1 drivers
+v0x55555a2b1eb0_0 .net "i_r", 0 0, v0x55555a2b27e0_0;  1 drivers
+v0x55555a2b1f70_0 .net "i_w", 0 0, v0x55555a2b2880_0;  1 drivers
+v0x55555a2b2080_0 .var "o_a", 0 0;
+v0x55555a2b2140_0 .var "o_b", 0 0;
+v0x55555a2b2200_0 .net "o_c", 0 0, L_0x55555a2b31d0;  alias, 1 drivers
+v0x55555a2b22c0_0 .net "tmp_a", 0 0, L_0x55555a2b2fb0;  1 drivers
+v0x55555a2b2380_0 .net "tmp_b", 0 0, L_0x55555a2b30c0;  1 drivers
+E_0x55555a29da80 .event posedge, v0x55555a25fd20_0;
+    .scope S_0x55555a25fb40;
+T_0 ;
+    %wait E_0x55555a29da80;
+    %load/vec4 v0x55555a2b22c0_0;
+    %assign/vec4 v0x55555a2b2080_0, 0;
+    %load/vec4 v0x55555a2b2380_0;
+    %assign/vec4 v0x55555a2b2140_0, 0;
+    %jmp T_0;
+    .thread T_0;
+    .scope S_0x55555a25f9b0;
+T_1 ;
+    %vpi_call 2 38 "$monitor", "Time=%4t, clock=%b : inputs=%b, outputs=%b", $time, v0x55555a2b2540_0, v0x55555a2b26a0_0, v0x55555a2b2b90_0 {0 0 0};
+    %pushi/vec4 0, 0, 1;
+    %store/vec4 v0x55555a2b2540_0, 0, 1;
+    %pushi/vec4 0, 0, 4;
+    %split/vec4 1;
+    %store/vec4 v0x55555a2b2740_0, 0, 1;
+    %split/vec4 1;
+    %store/vec4 v0x55555a2b2880_0, 0, 1;
+    %split/vec4 1;
+    %store/vec4 v0x55555a2b2600_0, 0, 1;
+    %store/vec4 v0x55555a2b27e0_0, 0, 1;
+    %pushi/vec4 16, 0, 32;
+T_1.0 %dup/vec4;
+    %pushi/vec4 0, 0, 32;
+    %cmp/s;
+    %jmp/1xz T_1.1, 5;
+    %jmp/1 T_1.1, 4;
+    %pushi/vec4 1, 0, 32;
+    %sub;
+    %delay 1000, 0;
+    %pushi/vec4 1, 0, 1;
+    %assign/vec4 v0x55555a2b2540_0, 0;
+    %load/vec4 v0x55555a2b27e0_0;
+    %load/vec4 v0x55555a2b2600_0;
+    %concat/vec4; draw_concat_vec4
+    %load/vec4 v0x55555a2b2880_0;
+    %concat/vec4; draw_concat_vec4
+    %load/vec4 v0x55555a2b2740_0;
+    %concat/vec4; draw_concat_vec4
+    %addi 1, 0, 4;
+    %split/vec4 1;
+    %assign/vec4 v0x55555a2b2740_0, 0;
+    %split/vec4 1;
+    %assign/vec4 v0x55555a2b2880_0, 0;
+    %split/vec4 1;
+    %assign/vec4 v0x55555a2b2600_0, 0;
+    %assign/vec4 v0x55555a2b27e0_0, 0;
+    %delay 1000, 0;
+    %pushi/vec4 0, 0, 1;
+    %assign/vec4 v0x55555a2b2540_0, 0;
+    %jmp T_1.0;
+T_1.1 ;
+    %pop/vec4 1;
+    %delay 1000, 0;
+    %vpi_call 2 61 "$finish" {0 0 0};
+    %end;
+    .thread T_1;
+# The file index is used to find the file name in the following table.
+:file_names 4;
+    "N/A";
+    "<interactive>";
+    "tb_mixed_logic_unit.v";
+    "mixed_logic_unit.v";

@@ -1,0 +1,85 @@
+#! /home/anssi/projects/fpga/oss-cad-suite/bin/vvp
+:ivl_version "13.0 (devel)" "(s20221226-533-g676b36e45)";
+:ivl_delay_selection "TYPICAL";
+:vpi_time_precision - 9;
+:vpi_module "/home/anssi/projects/fpga/oss-cad-suite/lib/ivl/system.vpi";
+:vpi_module "/home/anssi/projects/fpga/oss-cad-suite/lib/ivl/vhdl_sys.vpi";
+:vpi_module "/home/anssi/projects/fpga/oss-cad-suite/lib/ivl/vhdl_textio.vpi";
+:vpi_module "/home/anssi/projects/fpga/oss-cad-suite/lib/ivl/v2005_math.vpi";
+:vpi_module "/home/anssi/projects/fpga/oss-cad-suite/lib/ivl/va_math.vpi";
+S_0x555578a70fa0 .scope module, "tb_counter" "tb_counter" 2 4;
+ .timescale -9 -9;
+v0x555578a82f90_0 .var "in_clock", 0 0;
+v0x555578a83050_0 .var "in_enable", 0 0;
+v0x555578a83120_0 .net "in_nets", 2 0, L_0x555578a833b0;  1 drivers
+v0x555578a831f0_0 .var "in_reset", 0 0;
+v0x555578a832c0_0 .net "out_value", 8 0, v0x555578a82e30_0;  1 drivers
+L_0x555578a833b0 .concat [ 1 1 1 0], v0x555578a83050_0, v0x555578a831f0_0, v0x555578a82f90_0;
+S_0x555578a71130 .scope module, "DUT" "counter" 2 17, 3 1 0, S_0x555578a70fa0;
+ .timescale -9 -9;
+    .port_info 0 /INPUT 1 "in_clock";
+    .port_info 1 /INPUT 1 "in_reset";
+    .port_info 2 /INPUT 1 "in_enable";
+    .port_info 3 /OUTPUT 9 "out_value";
+v0x555578a71330_0 .net "in_clock", 0 0, v0x555578a82f90_0;  1 drivers
+v0x555578a82cd0_0 .net "in_enable", 0 0, v0x555578a83050_0;  1 drivers
+v0x555578a82d90_0 .net "in_reset", 0 0, v0x555578a831f0_0;  1 drivers
+v0x555578a82e30_0 .var "out_value", 8 0;
+E_0x555578a71e70 .event posedge, v0x555578a71330_0;
+    .scope S_0x555578a71130;
+T_0 ;
+    %wait E_0x555578a71e70;
+    %load/vec4 v0x555578a82d90_0;
+    %flag_set/vec4 8;
+    %jmp/0 T_0.0, 8;
+    %pushi/vec4 0, 0, 9;
+    %jmp/1 T_0.1, 8;
+T_0.0 ; End of true expr.
+    %load/vec4 v0x555578a82e30_0;
+    %load/vec4 v0x555578a82cd0_0;
+    %pad/u 9;
+    %add;
+    %jmp/0 T_0.1, 8;
+ ; End of false expr.
+    %blend;
+T_0.1;
+    %assign/vec4 v0x555578a82e30_0, 0;
+    %jmp T_0;
+    .thread T_0;
+    .scope S_0x555578a70fa0;
+T_1 ;
+    %pushi/vec4 0, 0, 1;
+    %store/vec4 v0x555578a82f90_0, 0, 1;
+    %end;
+    .thread T_1;
+    .scope S_0x555578a70fa0;
+T_2 ;
+    %delay 1, 0;
+    %load/vec4 v0x555578a82f90_0;
+    %inv;
+    %store/vec4 v0x555578a82f90_0, 0, 1;
+    %jmp T_2;
+    .thread T_2;
+    .scope S_0x555578a70fa0;
+T_3 ;
+    %vpi_call 2 33 "$monitor", "Time=%4t | Clock=%b | Inputs (Clk,Rst,En)=%b | Output=%d", $time, v0x555578a82f90_0, v0x555578a83120_0, v0x555578a832c0_0 {0 0 0};
+    %pushi/vec4 1, 0, 1;
+    %store/vec4 v0x555578a831f0_0, 0, 1;
+    %pushi/vec4 0, 0, 1;
+    %store/vec4 v0x555578a83050_0, 0, 1;
+    %delay 4, 0;
+    %pushi/vec4 0, 0, 1;
+    %store/vec4 v0x555578a831f0_0, 0, 1;
+    %delay 2, 0;
+    %pushi/vec4 1, 0, 1;
+    %store/vec4 v0x555578a83050_0, 0, 1;
+    %delay 40, 0;
+    %vpi_call 2 50 "$finish" {0 0 0};
+    %end;
+    .thread T_3;
+# The file index is used to find the file name in the following table.
+:file_names 4;
+    "N/A";
+    "<interactive>";
+    "tb_counter.v";
+    "counter.v";
