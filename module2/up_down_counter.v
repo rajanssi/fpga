@@ -18,22 +18,18 @@ module up_down_counter(
     if (in_reset) begin
       out_value <= 0;
       state <= s_IDLE;
-      
     end
     else begin
       case (state)
         s_IDLE: begin
-          
           if (in_start)
             state <= s_COUNT_UP;
         end
-
         s_COUNT_UP: begin
           out_value <= out_value + 1;
           if (out_value == 4'b1110)
             state <= s_COUNT_DOWN;
         end
-
         s_COUNT_DOWN: begin
           out_value <= out_value - 1;
           if (out_value == 4'b0001)
