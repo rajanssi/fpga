@@ -39,23 +39,47 @@ module tb_fifo_controller;
 
   // the main simulation
   initial begin
-    $monitor("Time=%4t, clock=%b : inputs=%b, outputs=%b", $time, in_clock, i_nets, o_nets);
-    $dumpfile("tb_fifo_controller.vcd");
-    $dumpvars(0,tb_fifo_controller);
+      $monitor("Time=%4t | Reset=%b | Put=%b Take=%b | Empty=%b Full=%b | W_Ptr=%d R_Ptr=%d", 
+               $time, in_reset, in_put, in_take, out_empty, out_full, out_write_pointer, out_read_pointer);
+      $dumpfile("tb_fifo_controller.vcd");
+      $dumpvars(0, tb_fifo_controller);
 
-    in_reset = 0;
+      // Initial State
+      in_reset = 0;
+      in_put   = 0;
+      in_take  = 0;
 
-    #(2);
-    in_reset = 1;
-    #(2);
-    in_reset = 0;
-    in_put   = 0;
-    in_take  = 0;
-    #(2);
-    in_put   = 1;
-    #(20);
-    $finish;
+      // 1. Trigger Reset
+      #(2);
+      in_reset = 1;
+      #(2); // Hold for a full clock cycle
+      in_reset = 0;
+      #(2);
 
-  end
+      // 2. Fill the FIFO (ASIZE=4 means 16 slots)
+      $display("--- Starting Fill Operation ---");
+      in_put = 1;
+      repeat (16) @(posedge in_clock);
+      
+      // At this point, out_full should be 1
+      in_put = 0;
+      #(4);
+
+      // 3. Try to 'Put' into a Full FIFO (should have no effect)
+      in_put = 1;
+      #(2);
+      in_put = 0;
+
+      // 4. Empty the FIFO
+      $display("--- Starting Empty Operation ---");
+      in_take = 1;
+      repeat (16) @(posedge in_clock);
+      
+      // At this point, out_empty should be 1
+      in_take = 0;
+      #(10);
+
+      $finish;
+    end
 
 endmodule
