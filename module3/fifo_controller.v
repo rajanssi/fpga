@@ -1,7 +1,7 @@
-module fifo_controller #(parameter FIFO_ASIZE = 4) 
+module fifo_controller #(parameter FIFO_ASIZE = 4)
 (
   input  wire in_clock,
-  input  wire in_reset,         
+  input  wire in_reset,
   input  wire in_take,
   input  wire in_put,
   output wire out_empty,
@@ -9,7 +9,6 @@ module fifo_controller #(parameter FIFO_ASIZE = 4)
   output wire[FIFO_ASIZE-1:0] out_write_pointer,
   output wire[FIFO_ASIZE-1:0] out_read_pointer
 );
-  
   reg[FIFO_ASIZE:0] write_counter;
   reg[FIFO_ASIZE:0] read_counter;
 
@@ -20,7 +19,6 @@ module fifo_controller #(parameter FIFO_ASIZE = 4)
 
   assign out_write_pointer = write_counter[FIFO_ASIZE-1:0];
   assign out_read_pointer  = read_counter[FIFO_ASIZE-1:0];
-  
   always @(posedge in_clock) begin
     if (in_reset) begin
       write_counter <= 0;
