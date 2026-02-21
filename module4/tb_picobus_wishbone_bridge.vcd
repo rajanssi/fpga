@@ -1,0 +1,78 @@
+$date
+	Sat Feb 21 11:26:56 2026
+$end
+$version
+	Icarus Verilog
+$end
+$timescale
+	1ns
+$end
+$scope module tb_picobus_wishbone_bridge $end
+$var reg 1 ! in_clock $end
+$var reg 32 " in_pico_address [31:0] $end
+$var reg 1 # in_pico_valid $end
+$var reg 4 $ in_pico_wdata [3:0] $end
+$var reg 4 % in_pico_wstrobe [3:0] $end
+$var reg 1 & in_reset $end
+$upscope $end
+$enddefinitions $end
+$comment Show the parameter values. $end
+$dumpall
+$end
+#0
+$dumpvars
+1&
+bx %
+bx $
+x#
+bx "
+1!
+$end
+#1
+0!
+#2
+1!
+0#
+0&
+#3
+0!
+#4
+1!
+b1111 $
+b1111 %
+b1000101000000000000000000100100 "
+1#
+#5
+0!
+#6
+1!
+#7
+0!
+#8
+1!
+#9
+0!
+b0 $
+b0 %
+b0 "
+0#
+#10
+1!
+#11
+0!
+#12
+1!
+#13
+0!
+#14
+1!
+#15
+0!
+#16
+1!
+#17
+0!
+#18
+1!
+#19
+0!
